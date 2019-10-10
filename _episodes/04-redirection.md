@@ -30,125 +30,45 @@ regular expressions in this lesson, and are instead going to specify the strings
 we are searching for.
 Let's give it a try!
 
-> ## Nucleotide abbreviations
+> ## Indicator codes in WDI
 > 
-> The four nucleotides that appear in DNA are abbreviated `A`, `C`, `T` and `G`. 
-> Unknown nucleotides are represented with the letter `N`. An `N` appearing
-> in a sequencing file represents a position where the sequencing machine was not able to 
-> confidently determine the nucleotide in that position. You can think of an `N` as being aNy 
-> nucleotide at that position in the DNA sequence. 
+> The World Bank names its economic and social indicators according to a [systematic coding convention](https://datahelpdesk.worldbank.org/knowledgebase/articles/201175-how-does-the-world-bank-code-its-indicators). For example, "GDP per capita, PPP (constant 2011 international $)" is called `NY.GDP.PCAP.PP.KD`. The codes stand for "national accounts, income", "GDP", "per capita", "at purchasing power parity", "in constant dollars." 
 > 
 {: .callout}
 
-We'll search for strings inside of our fastq files. Let's first make sure we are in the correct 
+We'll search for indicators inside of our fastq files. Let's first make sure we are in the correct 
 directory:
 
 ~~~
-$ cd ~/shell_data/untrimmed_fastq
+$ cd ~/Downloads/shell-economics/data/raw/worldbank/
 ~~~
 {: .bash}
 
 Suppose we want to see how many reads in our file have really bad segments containing 10 consecutive unknown nucleotides (Ns).
 
-> ## Determining quality
-> 
-> In this lesson, we're going to be manually searching for strings of `N`s within our sequence
-> results to illustrate some principles of file searching. It can be really useful to do this
-> type of searching to get a feel for the quality of your sequencing results, however, in your 
-> research you will most likely use a bioinformatics tool that has a built-in program for
-> filtering out low-quality reads. You'll learn how to use one such tool in 
-> [a later lesson](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html).
-> 
-{: .callout}
-
-Let's search for the string NNNNNNNNNN in the SRR098026 file:
+Let's search for the string `NY.GDP.PCAP.PP.KD` in `WDIData.csv`:
 ~~~
-$ grep NNNNNNNNNN SRR098026.fastq
+$ grep NY.GDP.PCAP.PP.KD WDIData.csv
 ~~~
 {: .bash}
 
-This command returns a lot of output to the terminal. Every single line in the SRR098026 
-file that contains at least 10 consecutive Ns is printed to the terminal, regardless of how long or short the file is. 
-We may be interested not only in the actual sequence which contains this string, but 
-in the name (or identifier) of that sequence. We discussed in a previous lesson 
-that the identifier line immediately precedes the nucleotide sequence for each read
-in a FASTQ file. We may also want to inspect the quality scores associated with
-each of these reads. To get all of this information, we will return the line 
-immediately before each match and the two lines immediately after each match.
-
-We can use the `-B` argument for grep to return a specific number of lines before
-each match. The `-A` argument returns a specific number of lines after each matching line. Here we want the line *before* and the two lines *after* each 
-matching line, so we add `-B1 -A2` to our grep command:
-
-~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq
-~~~
-{: .bash}
-
-One of the sets of lines returned by this command is: 
-
-~~~
-@SRR098026.177 HWUSI-EAS1599_1:2:1:1:2025 length=35
-CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-+SRR098026.177 HWUSI-EAS1599_1:2:1:1:2025 length=35
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-~~~
-{: .output}
+This command returns a lot of output to the terminal. Every single line in the WDIData.csv 
+file that contains information about GDP per capita (as defined above) is printed to the terminal, regardless of how long or short the file is. 
 
 > ## Exercise
 >
-> 1. Search for the sequence `GNATNACCACTTCC` in the `SRR098026.fastq` file.
-> Have your search return all matching lines and the name (or identifier) for each sequence
-> that contains a match.
+> Search for the indicator `SP.POP.TOTL` (corresponding to total population) in the `WDIData.csv` file.
 > 
-> 2. Search for the sequence `AAGTT` in both FASTQ files.
-> Have your search return all matching lines and the name (or identifier) for each sequence
-> that contains a match.
 > 
 > > ## Solution  
-> > 1. `grep -B1 GNATNACCACTTCC SRR098026.fastq` 
-> > 
-> >     ```
-> >     @SRR098026.245 HWUSI-EAS1599_1:2:1:2:801 length=35
-> >     GNATNACCACTTCCAGTGCTGANNNNNNNGGGATG
-> >     ```
-> > 
-> > 2. `grep -B1 AAGTT *.fastq`
-> >
-> >     ```
-> > SRR097977.fastq-@SRR097977.11 209DTAAXX_Lenski2_1_7:8:3:247:351 length=36
-> > SRR097977.fastq:GATTGCTTTAATGAAAAAGTCATATAAGTTGCCATG
-> > --
-> > SRR097977.fastq-@SRR097977.67 209DTAAXX_Lenski2_1_7:8:3:544:566 length=36
-> > SRR097977.fastq:TTGTCCACGCTTTTCTATGTAAAGTTTATTTGCTTT
-> > --
-> > SRR097977.fastq-@SRR097977.68 209DTAAXX_Lenski2_1_7:8:3:724:110 length=36
-> > SRR097977.fastq:TGAAGCCTGCTTTTTTATACTAAGTTTGCATTATAA
-> > --
-> > SRR097977.fastq-@SRR097977.80 209DTAAXX_Lenski2_1_7:8:3:258:281 length=36
-> > SRR097977.fastq:GTGGCGCTGCTGCATAAGTTGGGTTATCAGGTCGTT
-> > --
-> > SRR097977.fastq-@SRR097977.92 209DTAAXX_Lenski2_1_7:8:3:353:318 length=36
-> > SRR097977.fastq:GGCAAAATGGTCCTCCAGCCAGGCCAGAAGCAAGTT
-> > --
-> > SRR097977.fastq-@SRR097977.139 209DTAAXX_Lenski2_1_7:8:3:703:655 length=36
-> > SRR097977.fastq:TTTATTTGTAAAGTTTTGTTGAAATAAGGGTTGTAA
-> > --
-> > SRR097977.fastq-@SRR097977.238 209DTAAXX_Lenski2_1_7:8:3:592:919 length=36
-> > SRR097977.fastq:TTCTTACCATCCTGAAGTTTTTTCATCTTCCCTGAT
-> > --
-> > SRR098026.fastq-@SRR098026.158 HWUSI-EAS1599_1:2:1:1:1505 length=35
-> > SRR098026.fastq:GNNNNNNNNCAAAGTTGATCNNNNNNNNNTGTGCG
-> >     ```
-> > 
+> > `grep SP.POP.TOTL WDIData.csv` 
 > {: .solution}
 {: .challenge}
 
 ## Redirecting output
 
-`grep` allowed us to identify sequences in our FASTQ files that match a particular pattern. 
-All of these sequences were printed to our terminal screen, but in order to work with these 
-sequences and perform other operations on them, we will need to capture that output in some
+`grep` allowed us to identify lines in our CSV files that match a particular pattern. 
+All of these lines were printed to our terminal screen, but in order to work with and perform other operations on them, we will need to capture that output in some
 way. 
 
 We can do this with something called "redirection". The idea is that
@@ -158,41 +78,29 @@ use other commands to analyze this data.
 
 The command for redirecting output to a file is `>`.
 
-Let's try out this command and copy all the records (including all four lines of each record) 
-in our FASTQ files that contain 
-'NNNNNNNNNN' to another file called `bad_reads.txt`.
+Let's try out this command and copy all the records 
+in WDI that contain 
+`NY.GDP.PCAP.PP.KD` to another file called `gdp_per_capita.csv`.
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
+$ grep NY.GDP.PCAP.PP.KD WDIData.csv > gdp_per_capita.csv
 ~~~
 {: .bash}
 
-> ## File extensions
-> 
-> You might be confused about why we're naming our output file with a `.txt` extension. After all,
-> it will be holding FASTQ formatted data that we're extracting from our FASTQ files. Won't it 
-> also be a FASTQ file? The answer is, yes - it will be a FASTQ file and it would make sense to 
-> name it with a `.fastq` extension. However, using a `.fastq` extension will lead us to problems
-> when we move to using wildcards later in this episode. We'll point out where this becomes
-> important. For now, it's good that you're thinking about file extensions! 
-> 
-{: .callout}
-
-
 The prompt should sit there a little bit, and then it should look like nothing
-happened. But type `ls`. You should see a new file called `bad_reads.txt`. 
+happened. But type `ls`. You should see a new file called `gdp_per_capita.csv`. 
 
 We can check the number of lines in our new file using a command called `wc`. 
 `wc` stands for **word count**. This command counts the number of words, lines, and characters
 in a file. 
 
 ~~~
-$ wc bad_reads.txt
+$ wc gdp_per_capita.csv
 ~~~
 {: .bash}
 
 ~~~
-  537  1073 23217 bad_reads.txt
+     264    2345  175056 gdp_per_capita.csv
 ~~~
 {: .output}
 
@@ -200,93 +108,89 @@ This will tell us the number of lines, words and characters in the file. If we
 want only the number of lines, we can use the `-l` flag for `lines`.
 
 ~~~
-$ wc -l bad_reads.txt
+$ wc -l gdp_per_capita.csv
 ~~~
 {: .bash}
 
 ~~~
-537 bad_reads.txt
+264 gdp_per_capita.csv
 ~~~
 {: .output}
 
-Because we asked `grep` for all four lines of each FASTQ record, we need to divide the output by
-four to get the number of sequences that match our search pattern.
-
 > ## Exercise
 >
-> How many sequences in `SRR098026.fastq` contain at least 3 consecutive Ns?
+> How many rows in `WDIData.csv` contain GDP per capita data in current national currency (`NY.GDP.PCAP.CN`)?
 >
 >> ## Solution
 >>  
 >>
 >> ~~~
->> $ grep NNN SRR098026.fastq > bad_reads.txt
->> $ wc -l bad_reads.txt
+>> $ grep NY.GDP.PCAP.CN WDIData.csv > gdp_per_capita.csv
+>> $ wc -l gdp_per_capita.csv
 >> ~~~
 >> {: .bash}
 >> 
 >> ~~~
->> 249
+>> 264
 >> ~~~
 >> {: .output}
->>
+>> Note that we did not check whether these rows actually contain data.
 > {: .solution}
 {: .challenge}
 
-We might want to search multiple FASTQ files for sequences that match our search pattern.
+We might want to search multiple indicators in multiple files.
 However, we need to be careful, because each time we use the `>` command to redirect output
 to a file, the new output will replace the output that was already present in the file. 
-This is called "overwriting" and, just like you don't want to overwrite your video recording
-of your kid's first birthday party, you also want to avoid overwriting your data files.
+You want to avoid overwriting your data files.
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+$ grep NY.GDP.PCAP.PP.KD WDISeries.csv  > gdp_per_capita.csv 
+$ wc -l gdp_per_capita.csv
 ~~~
 {: .bash}
 
 ~~~
-537 bad_reads.txt
+1 gdp_per_capita.csv
 ~~~
 {: .output}
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR097977.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+$ grep NY.GDP.PCAP.PP.KD WDISeries-Time.csv  > gdp_per_capita.csv
+$ wc -l gdp_per_capita.csv
 ~~~
 {: .bash}
 
 ~~~
-0 bad_reads.txt
+0 gdp_per_capita.csv
 ~~~
 {: .output}
 
-Here, the output of our second  call to `wc` shows that we no longer have any lines in our `bad_reads.txt` file. This is 
-because the second file we searched (`SRR097977.fastq`) does not contain any lines that match our
-search sequence. So our file was overwritten and is now empty.
+Here, the output of our second  call to `wc` shows that we no longer have any lines in our `gdp_per_capita.csv` file. This is 
+because the second file we searched (`WDISeries-Time.csv`) does not contain any lines that match our
+search pattern. So our file was overwritten and is now empty.
 
 We can avoid overwriting our files by using the command `>>`. `>>` is known as the "append redirect" and will 
 append new output to the end of a file, rather than overwriting it.
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+$ grep NY.GDP.PCAP.PP.KD WDISeries.csv >> gdp_per_capita.csv
+$ wc -l gdp_per_capita.csv
 ~~~
 {: .bash}
 
 ~~~
-537 bad_reads.txt
+1 gdp_per_capita.csv
 ~~~
 {: .output}
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR097977.fastq >> bad_reads.txt
-$ wc -l bad_reads.txt
+$ grep NY.GDP.PCAP.PP.KD WDISeries-Time.csv >> gdp_per_capita.csv
+$ wc -l gdp_per_capita.csv
 ~~~
 {: .bash}
 
 ~~~
-537 bad_reads.txt
+1 gdp_per_capita.csv
 ~~~
 {: .output}
 
@@ -295,38 +199,15 @@ The output of our second call to `wc` shows that we have not overwritten our ori
 We can also do this with a single line of code by using a wildcard: 
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN *.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+$ grep NY.GDP.PCAP.PP.KD WDI*.csv > gdp_per_capita.csv
+$ wc -l gdp_per_capita.csv
 ~~~
 {: .bash}
 
 ~~~
-537 bad_reads.txt
+286 gdp_per_capita.csv
 ~~~
 {: .output}
-
-> ## File extensions - part 2
-> 
-> This is where we would have trouble if we were naming our output file with a `.fastq` extension. 
-> If we already had a file called `bad_reads.fastq` (from our previous `grep` practice) 
-> and then ran the command above using a `.fastq` extension instead of a `.txt` extension, `grep`
-> would give us a warning. 
-> 
-> ~~~
-> grep -B1 -A2 NNNNNNNNNN *.fastq > bad_reads.fastq
-> ~~~
-> {: .bash}
-> 
-> ~~~
-> grep: input file ‘bad_reads.fastq’ is also the output
-> ~~~
-> {: .output}
-> 
-> `grep` is letting you know that the output file `bad_reads.fastq` is also included in your
-> `grep` call because it matches the `*.fastq` pattern. Be careful with this as it can lead to
-> some unintended results.
-> 
-{: .callout}
 
 Since we might have multiple different criteria we want to search for, 
 creating a new output file each time has the potential to clutter up our workspace. We also
@@ -344,7 +225,7 @@ look at it, like we can with `less`. Well it turns out that we can! We can redir
 from our `grep` call through the `less` command.
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq | less
+$ grep NY.GDP.PCAP.PP.KD WDIData.csv | less
 ~~~
 {: .bash}
 
@@ -356,7 +237,7 @@ the output of the grep search to the command `wc -l`. This can be helpful for in
 you would like to save it to a file. 
 
 ~~~
-$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq | wc -l 
+$ grep NY.GDP.PCAP.PP.KD WDIData.csv | wc -l 
 ~~~
 {: .bash}
 
@@ -410,15 +291,10 @@ foo is abcEFG
 ~~~
 {: .bash}
 
-Let's write a for loop to show us the first two lines of the fastq files we downloaded earlier. You will notice the shell prompt changes from `$` to `>` and back again as we were typing in our loop. The second prompt, `>`, is different to remind us that we haven’t finished typing a complete command yet. A semicolon, `;`, can be used to separate two commands written on a single line.
+Let's write a for loop to show us the first two lines of the CSV files in the `worldbank` folder. You will notice the shell prompt changes from `$` to `>` and back again as we were typing in our loop. The second prompt, `>`, is different to remind us that we haven’t finished typing a complete command yet. A semicolon, `;`, can be used to separate two commands written on a single line.
 
 ~~~
-$ cd ../untrimmed_fastq/
-~~~
-{: .bash}
-
-~~~
-$ for filename in *.fastq
+$ for filename in *.csv
 > do
 > head -n 2 ${filename}
 > done
@@ -426,8 +302,9 @@ $ for filename in *.fastq
 {: .bash}
 
 The for loop begins with the formula `for <variable> in <group to iterate over>`. In this case, the word `filename` is designated 
-as the variable to be used over each iteration. In our case `SRR097977.fastq` and `SRR098026.fastq` will be substituted for `filename` 
-because they fit the pattern of ending with .fastq in the directory we've specified. The next line of the for loop is `do`. The next line is 
+as the variable to be used over each iteration. In our case `WDICountry-Series.csv`, `WDICountry.csv`, `WDIData.csv`, `WDIFootNote.csv`, `WDISeries-Time.csv`, `WDISeries.csv`, and `gdp_per_capita.csv`
+will be substituted for `filename` 
+because they fit the pattern of ending with .csv in the directory we've specified. The next line of the for loop is `do`. The next line is 
 the code that we want to execute. We are telling the loop to print the first two lines of each variable we iterate over. Finally, the
 word `done` ends the loop.
 
@@ -435,51 +312,51 @@ After executing the loop, you should see the first two lines of both fastq files
 will save this information to a file.
 
 ~~~
-$ for filename in *.fastq
+$ for filename in *.csv
 > do
-> head -n 2 ${filename} >> seq_info.txt
+> head -n 2 ${filename} >> wdi_headers.txt
 > done
 ~~~
 {: .bash}
 
-Note that we are using `>>` to append the text to our `seq_info.txt` file. If we used `>`, the `seq_info.txt` file would be rewritten
+Note that we are using `>>` to append the text to our `wdi_headers.txt` file. If we used `>`, the `wdi_headers.txt` file would be rewritten
 every time the loop iterates, so it would only have text from the last variable used. Instead, `>>` adds to the end of the file.
 
 ## Using Basename in for loops
-Basename is a function in UNIX that is helpful for removing a uniform part of a name from a list of files. In this case, we will use basename to remove the `.fastq` extension from the files that we’ve been working with. 
+Basename is a function in UNIX that is helpful for removing a uniform part of a name from a list of files. In this case, we will use basename to remove the `.csv` extension from the files that we’ve been working with. 
 
 ~~~
-$ basename SRR097977.fastq .fastq
+$ basename WDICountry.csv .csv
 ~~~
 {: .bash}
 
-We see that this returns just the SRR accession, and no longer has the .fastq file extension on it.
+We see that this returns
 
 ~~~
-SRR097977
+WDICountry
 ~~~
 {: .output}
 
-If we try the same thing but use `.fasta` as the file extension instead, nothing happens. This is because basename only works when it exactly matches a string in the file.
+If we try the same thing but use `.xls` as the file extension instead, nothing happens. This is because basename only works when it exactly matches a string in the file.
 
 ~~~
-$ basename SRR097977.fastq .fasta
+$ basename WDICountry.csv .xls
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq
+WDICountry.csv
 ~~~
 {: .output}
 
 Basename is really powerful when used in a for loop. It allows to access just the file prefix, which you can use to name things. Let's try this.
 
-Inside our for loop, we create a new name variable. We call the basename function inside the parenthesis, then give our variable name from the for loop, in this case `${filename}`, and finally state that `.fastq` should be removed from the file name. It’s important to note that we’re not changing the actual files, we’re creating a new variable called name. The line > echo $name will print to the terminal the variable name each time the for loop runs. Because we are iterating over two files, we expect to see two lines of output.
+Inside our for loop, we create a new name variable. We call the basename function inside the parenthesis, then give our variable name from the for loop, in this case `${filename}`, and finally state that `.csv` should be removed from the file name. It’s important to note that we’re not changing the actual files, we’re creating a new variable called name. The line `> echo $name` will print to the terminal the variable name each time the for loop runs. Because we are iterating over two files, we expect to see two lines of output.
 
 ~~~
-$ for filename in *.fastq
+$ for filename in *.csv
 > do
-> name=$(basename ${filename} .fastq)
+> name=$(basename ${filename} .csv)
 > echo ${name}
 > done
 ~~~
@@ -489,15 +366,16 @@ $ for filename in *.fastq
 
 > ## Exercise
 >
-> Print the file prefix of all of the `.txt` files in our current directory.
+> Print the file prefix of all of the `.md` (markdown) files in `~/Downloads/shell-economics`.
 >
 >> ## Solution
 >>  
 >>
 >> ~~~
->> $ for filename in *.txt
+>> $ cd ~/Downloads/shell-economics
+>> $ for filename in *.md
 >> > do
->> > name=$(basename ${filename} .txt)
+>> > name=$(basename ${filename} .md)
 >> > echo ${name}
 >> > done
 >> ~~~
@@ -506,13 +384,13 @@ $ for filename in *.fastq
 > {: .solution}
 {: .challenge}
 
-One way this is really useful is to move files. Let's rename all of our .txt files using `mv` so that they have the years on them, which will document when we created them. 
+One way this is really useful is to move files. Let's rename all of our .md files using `mv` so that they have the years on them, which will document when we created them. 
 
 ~~~
-$ for filename in *.txt
+$ for filename in *.md
 > do
-> name=$(basename ${filename} .txt)
-> mv ${filename}  ${name}_2019.txt
+> name=$(basename ${filename} .md)
+> mv ${filename}  ${name}-2019.md
 > done
 ~~~
 {: .bash}
@@ -520,16 +398,16 @@ $ for filename in *.txt
 
 > ## Exercise
 >
-> Remove `_2019` from all of the `.txt` files. 
+> Remove `-2019` from all of the `.md` files. 
 >
 >> ## Solution
 >>  
 >>
 >> ~~~
->> $ for filename in *_2019.txt
+>> $ for filename in *-2019.md
 >> > do
->> > name=$(basename ${filename} _2019.txt)
->> > mv ${filename} ${name}.txt
+>> > name=$(basename ${filename} -2019.md)
+>> > mv ${filename} ${name}.md
 >> > done
 >> ~~~
 >> {: .bash}

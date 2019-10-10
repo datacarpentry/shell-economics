@@ -37,17 +37,17 @@ window.onload = set_page_view_defaults;
 
 ## Writing files
 
-We've been able to do a lot of work with files that already exist, but what if we want to write our own files? We're not going to type in a FASTA file, but we'll see as we go through other tutorials, there are a lot of reasons we'll want to write a file, or edit an existing file.
+We've been able to do a lot of work with files that already exist, but what if we want to write our own files? We're not going to type in an actual dataset, but we'll see as we go through other tutorials, there are a lot of reasons we'll want to write a file, or edit an existing file.
 
-To add text to files, we're going to use a text editor called Nano. We're going to create a file to take notes about what we've been doing with the data files in `~/shell_data/untrimmed_fastq`.
+To add text to files, we're going to use a text editor called Nano. We're going to create a file to take notes about what we've been doing with the data files in `data/raw/worldbank`.
 
-This is good practice when working in bioinformatics. We can create a file called `README.txt` that describes the data files in the directory or documents how the files in that directory were generated.  As the name suggests, it's a file that we or others should read to understand the information in that directory.
+This is good practice when doing data wrangling and analysis. We can create a file called `README.txt` that describes the data files in the directory or documents how the files in that directory were generated.  As the name suggests, it's a file that we or others should read to understand the information in that directory.
 
-Let's change our working directory to `~/shell_data/untrimmed_fastq` using `cd`,
+Let's change our working directory to `~/Downloads/shell-economics/data/worldbank` using `cd`,
 then run `nano` to create a file called `README.txt`:
 
 ~~~
-$ cd ~/shell_data/untrimmed_fastq
+$ cd ~/Downloads/shell-economics/data/worldbank
 $ nano README.txt
 ~~~
 {: .bash}
@@ -129,6 +129,8 @@ Now you've written a file. You can take a look at it with `less` or `cat`, or op
 
 A really powerful thing about the command line is that you can write scripts. Scripts let you save commands to run them and also lets you put multiple commands together. Though writing scripts may require an additional time investment initially, this can save you time as you run them repeatedly. Scripts can also address the challenge of reproducibility: if you need to repeat an analysis, you retain a record of your command history within the script.
 
+FIXME: change to econ relevant example
+
 One thing we will commonly want to do with sequencing results is pull out bad reads and write them to a file to see if we can figure out what's going on with them. We're going to look for reads with long sequences of N's like we did before, but now we're going to write a script, so we can run it each time we get new sequences, rather than type the code in by hand each time.
 
 We're going to create a new file to put this command in. We'll call it `bad-reads-script.sh`. The `sh` isn't required, but using that extension tells us that it's a shell script.
@@ -141,7 +143,7 @@ $ nano bad-reads-script.sh
 Bad reads have a lot of N's, so we're going to look for  `NNNNNNNNNN` with `grep`. We want the whole FASTQ record, so we're also going to get the one line above the sequence and the two lines below. We also want to look in all the files that end with `.fastq`, so we're going to use the `*` wildcard.
 
 ~~~
-grep -B1 -A2 NNNNNNNNNN *.fastq > scripted_bad_reads.txt
+grep -B1 -A2 NNNNNNNNNN *.fastq > scripted_gdp_per_capita.csv
 ~~~
 {: .bash}
 
@@ -154,7 +156,7 @@ $ bash bad-reads-script.sh
 ~~~
 {: .bash}
 
-It will look like nothing happened, but now if you look at `scripted_bad_reads.txt`, you can see that there are now reads in the file.
+It will look like nothing happened, but now if you look at `scripted_gdp_per_capita.csv`, you can see that there are now reads in the file.
 
 
 > ## Exercise
@@ -364,7 +366,7 @@ $  scp local_file.txt dcuser@ip.address:/home/dcuser/
 
 #### Downloading Data from your Virtual Machine with scp
 
-Let's download a text file from our remote machine. You should have a file that contains bad reads called ~/shell_data/scripted_bad_reads.txt.
+Let's download a text file from our remote machine. You should have a file that contains bad reads called ~/shell_data/scripted_gdp_per_capita.csv.
 
 **Tip:** If you are looking for another (or any really) text file in your home directory to use instead, try:
 
@@ -374,10 +376,10 @@ $ find ~ -name *.txt
 {: .bash}
 
 
-Download the bad reads file in ~/shell_data/scripted_bad_reads.txt to your home ~/Download directory using the following command **(make sure you substitute dcuser@ip.address with your remote login credentials)**:
+Download the bad reads file in ~/shell_data/scripted_gdp_per_capita.csv to your home ~/Download directory using the following command **(make sure you substitute dcuser@ip.address with your remote login credentials)**:
 
 ~~~
-$ scp dcuser@ip.address:/home/dcuser/shell_data/untrimmed_fastq/scripted_bad_reads.txt ~/Downloads
+$ scp dcuser@ip.address:/home/dcuser/shell_data/untrimmed_fastq/scripted_gdp_per_capita.csv ~/Downloads
 ~~~
 {: .bash}
 
@@ -418,7 +420,7 @@ C:\User\your-pc-username\Downloads> pscp.exe local_file.txt dcuser@ec2-54-88-126
 2. Download the text file using the following command **(make sure you substitute 'your-pc-username' for your actual pc username and 'ec2-54-88-126-85.compute-1.amazonaws.com' with your AMI instance address)**
 
 ~~~
-C:\User\your-pc-username\Downloads> pscp.exe dcuser@ec2-54-88-126-85.compute-1.amazonaws.com:/home/dcuser/shell_data/untrimmed_fastq/scripted_bad_reads.txt.
+C:\User\your-pc-username\Downloads> pscp.exe dcuser@ec2-54-88-126-85.compute-1.amazonaws.com:/home/dcuser/shell_data/untrimmed_fastq/scripted_gdp_per_capita.csv.
 
 C:\User\your-pc-username\Downloads
 ~~~

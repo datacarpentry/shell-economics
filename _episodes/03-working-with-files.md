@@ -21,7 +21,7 @@ keypoints:
 
 ## Working with Files
 
-### Our data set: FASTQ files
+### Our data set: World Development Indicators
 
 Now that we know how to navigate around our directory structure, let's
 start working with our data files. The World Development Indicators dataset is stored in the `worldbank` directory. 
