@@ -9,21 +9,14 @@ Command line interface (OS shell) and graphic user interface (GUI) are different
 
 There are quite a few reasons to start learning about the shell:
 
-- For most bioinformatics tools, you have to use the shell. There is no graphical interface. If you want to work in metagenomics or genomics you're going to need to use the shell.
 - The shell gives you power. The command line gives you the power to do your work more efficiently and more quickly. When you need to do things tens to hundreds of times, knowing how to use the shell is transformative.
 - To use remote computers or cloud computing, you need to use the shell.
 
 > ## Getting Started
 >
-> This lesson assumes no prior experience with the tools covered in the workshop. 
-> However, learners are expected to have some familiarity with biological concepts,
-> including the 
-> concept of genomic variation within a population. Participants should bring their laptops and plan to participate actively. 
+> This lesson assumes no prior experience with the tools covered in the workshop. Participants should bring their laptops and plan to participate actively. 
 >
-> This lesson is part of a workshop that uses data hosted on an Amazon Machine Instance (AMI). Workshop participants will be given 
-> information on how
-> to log-in to the AMI during the workshop. Learners using these materials for self-directed study will need to set up their own
-> AMI. Information on setting up an AMI and accessing the required data is provided on the [Genomics Workshop setup page](https://www.datacarpentry.org/genomics-workshop/setup.html).
+> This lesson is part of a workshop that uses data hosted on [Zenodo](https://zenodo.org/record/3477935#.XZ9B_uczYWo). Please see the [Workshop setup page](https://korenmiklos.github.io/2019-10-15-CEU/#setup).
 {: .prereq}
 
 > ## For Instructors

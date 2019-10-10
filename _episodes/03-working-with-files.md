@@ -24,57 +24,57 @@ keypoints:
 ### Our data set: FASTQ files
 
 Now that we know how to navigate around our directory structure, let's
-start working with our sequencing files. We did a sequencing experiment and 
-have two results files, which are stored in our `untrimmed_fastq` directory. 
+start working with our data files. The World Development Indicators dataset is stored in the `worldbank` directory. 
 
 ### Wildcards
 
-Navigate to your `untrimmed_fastq` directory:
+Navigate to your `data/raw/worldbank` directory:
 
 ~~~
-$ cd ~/shell_data/untrimmed_fastq
+$ cd ~/Downloads/shell-economics/data/raw/worldbank/
 ~~~
 {: .bash}
 
-We are interested in looking at the FASTQ files in this directory. We can list
-all files with the .fastq extension using the command:
+We are interested in looking at the CSV files in this directory. We can list
+all files with the .csv extension using the command:
 
 ~~~
-$ ls *.fastq
+$ ls *.csv
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq  SRR098026.fastq
+WDICountry-Series.csv	WDICountry.csv		WDIData.csv		WDIFootNote.csv		WDISeries-Time.csv	WDISeries.csv
 ~~~
 {: .output}
 
 The `*` character is a special type of character called a wildcard, which can be used to represent any number of any type of character. 
-Thus, `*.fastq` matches every file that ends with `.fastq`. 
+Thus, `*.csv` matches every file that ends with `.csv`. 
 
 This command: 
 
 ~~~
-$ ls *977.fastq
+$ ls *Data.csv
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq
+WDIData.csv
 ~~~
 {: .output}
 
-lists only the file that ends with `977.fastq`.
+lists only the file that ends with `Data.csv`.
 
 This command:
 
+FIXME: is this working on git bash?
 ~~~
 $ ls /usr/bin/*.sh
 ~~~
 {: .bash}
 
 ~~~
-/usr/bin/amuFormat.sh  /usr/bin/gettext.sh  /usr/bin/gvmap.sh
+/usr/bin/power_report.sh
 ~~~
 {: .output}
 
@@ -86,7 +86,7 @@ Lists every file in `/usr/bin` that ends in the characters `.sh`.
 > The root directory is the highest level directory in your file system and contains
 > files that are important for your computer to perform its daily work, but which you usually won't
 > have to interact with directly. In our case,
-> the root directory is two levels above our home directory, so `cd` or `cd ~` will take you to `/home/dcuser`
+> the root directory is two levels above our home directory, so `cd` or `cd ~` will take you to `/Users/koren`
 > and `cd /` will take you to `/`, which is equivalent to `~/../../`. Try not to worry if this is confusing,
 > it will all become clearer with practice.
 > 
@@ -124,17 +124,17 @@ Lists every file in `/usr/bin` that ends in the characters `.sh`.
 > We can use the command `echo` to see how the wildcard character is interpreted by the shell.
 > 
 > ~~~
-> $ echo *.fastq
+> $ echo *.csv
 > ~~~
 > {: .bash}
 > 
 > ~~~
-> SRR097977.fastq SRR098026.fastq
+> WDICountry-Series.csv WDICountry.csv WDIData.csv WDIFootNote.csv WDISeries-Time.csv WDISeries.csv
 > ~~~
 > {: .output}
 > 
-> The `*` is expanded to include any file that ends with `.fastq`. We can see that the output of
-> `echo *.fastq` is the same as that of `ls *.fastq`.
+> The `*` is expanded to include any file that ends with `.csv`. We can see that the output of
+> `echo *.csv` is the same as that of `ls *.csv`.
 > 
 > What would the output look like if the wildcard could *not* be matched? Compare the outputs of
 > `echo *.missing` and `ls *.missing`.
@@ -193,7 +193,7 @@ For example, if your history looked like this:
 ~~~
 259  ls *
 260  ls /usr/bin/*.sh
-261  ls *R1*fastq
+261  ls *R1*csv
 ~~~
 {: .output}
 
@@ -225,26 +225,26 @@ contents of directories, but how do we look at the contents of files?
 One way to examine a file is to print out all of the
 contents using the program `cat`. 
 
-Enter the following command from within the `untrimmed_fastq` directory: 
+Enter the following command from within the `worldbank` directory: 
 
 ~~~
-$ cat SRR098026.fastq
+$ cat WDIData.csv
 ~~~
 {: .bash}
 
-This will print out all of the contents of the `SRR098026.fastq` to the screen.
+This will print out all of the contents of the `WDIData.csv` to the screen. (It will take a few seconds, as the file is large.)
 
 
 > ## Exercise
 > 
-> 1. Print out the contents of the `~/shell_data/untrimmed_fastq/SRR097977.fastq` file. What is the last line of the file? 
+> 1. Print out the contents of the `~/Downloads/shell-economics/data/raw/worldbank/WDIFootNote.csv ` file. What is the last line of the file? 
 > 2.  From your home directory, and without changing directories,
 > use one short command to print the contents of all of the files in
-> the `~/shell_data/untrimmed_fastq` directory.
+> the `~/Downloads/shell-economics/data/raw` directory.
 > 
 > > ## Solution
-> > 1. The last line of the file is `C:CCC::CCCCCCCC<8?6A:C28C<608'&&&,'$`.
-> > 2. `cat ~/shell_data/untrimmed_fastq/*`
+> > 1. The last line of the file is `"ZWE","ST.INT.ARVL","YR2010","Refers to arrivals of non-resident visitors at national borders.",`.
+> > 2. `cat ~/Downloads/shell-economics/data/raw/*`
 > {: .solution}
 {: .challenge}
 
@@ -256,7 +256,7 @@ are identical to the `man` program.
 Enter the following command:
 
 ~~~
-$ less SRR097977.fastq
+$ less WDIData.csv
 ~~~
 {: .bash}
 
@@ -278,22 +278,22 @@ that word is found.
 **Shortcut:** If you hit "/" then "enter", `less` will  repeat
 the previous search. `less` searches from the current location and
 works its way forward. Note, if you are at the end of the file and search
-for the sequence "CAA", `less` will not find it. You either need to go to the
+for the word "Belgium", `less` will not find it. You either need to go to the
 beginning of the file (by typing `g`) and search again using `/` or you
 can use `?` to search backwards in the same way you used `/` previously.
 
-For instance, let's search forward for the sequence `TTTTT` in our file. 
-You can see that we go right to that sequence, what it looks like,
+For instance, let's search forward for the word `Tanzania` in our file. 
+You can see that we go right to that row, what it looks like,
 and where it is in the file. If you continue to type `/` and hit return, you will move 
-forward to the next instance of this sequence motif. If you instead type `?` and hit 
-return, you will search backwards and move up the file to previous examples of this motif.
+forward to the next instance of this string. If you instead type `?` and hit 
+return, you will search backwards and move up the file to previous examples of this string.
 
 > ## Exercise
 >
-> What are the next three nucleotides (characters) after the first instance of the sequence quoted above?
+> What is the three-letter word after the first occurence of the word "Tanzania"?
 > 
 > > ## Solution
-> > `CAC`
+> > `TZA`
 > {: .solution}
 {: .challenge}
 
@@ -309,40 +309,40 @@ The commands are `head` and `tail` and they let you look at
 the beginning and end of a file, respectively.
 
 ~~~
-$ head SRR098026.fastq
+$ head WDISeries-Time.csv 
 ~~~
 {: .bash}
 
 ~~~
-@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
-+SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-@SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
-NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
-+SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-@SRR098026.3 HWUSI-EAS1599_1:2:1:0:570 length=35
-NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
+"SeriesCode","Year","DESCRIPTION",
+"SP.ADO.TFRT","YR1960","Interpolated using data for 1957 and 1962.",
+"SP.DYN.AMRT.FE","YR1960","Interpolated using data for 1957 and 1962, if the data source is United Nations World Population Prospects.",
+"SP.DYN.AMRT.MA","YR1960","Interpolated using data for 1957 and 1962, if the data source is United Nations World Population Prospects.",
+"SP.DYN.TO65.FE.ZS","YR1960","Interpolated using data for 1957 and 1962.",
+"SP.DYN.TO65.MA.ZS","YR1960","Interpolated using data for 1957 and 1962.",
+"SP.DYN.TO65.MA.ZS","YR1961","Interpolated using data for 1957 and 1962.",
+"SP.DYN.TO65.FE.ZS","YR1961","Interpolated using data for 1957 and 1962.",
+"SP.DYN.AMRT.MA","YR1961","Interpolated using data for 1957 and 1962, if the data source is United Nations World Population Prospects.",
+"SP.DYN.AMRT.FE","YR1961","Interpolated using data for 1957 and 1962, if the data source is United Nations World Population Prospects.",
 ~~~
 {: .output}
 
 ~~~
-$ tail SRR098026.fastq
+$ tail WDISeries-Time.csv 
 ~~~
 {: .bash}
 
 ~~~
-+SRR098026.247 HWUSI-EAS1599_1:2:1:2:1311 length=35
-#!##!#################!!!!!!!######
-@SRR098026.248 HWUSI-EAS1599_1:2:1:2:118 length=35
-GNTGNGGTCATCATACGCGCCCNNNNNNNGGCATG
-+SRR098026.248 HWUSI-EAS1599_1:2:1:2:118 length=35
-B!;?!A=5922:##########!!!!!!!######
-@SRR098026.249 HWUSI-EAS1599_1:2:1:2:1057 length=35
-CNCTNTATGCGTACGGCAGTGANNNNNNNGGAGAT
-+SRR098026.249 HWUSI-EAS1599_1:2:1:2:1057 length=35
-A!@B!BBB@ABAB#########!!!!!!!######
+"SP.DYN.TO65.FE.ZS","YR2016","Interpolated using data for 2012 and 2017.",
+"SP.DYN.TO65.FE.ZS","YR2017","The data refer to 2015-2020.",
+"SP.DYN.AMRT.MA","YR2017","The data refer to 2015-2020, if the data source is United Nations World Population Prospects.",
+"SM.POP.NETM","YR2017","The data refer to five-year periods running from 1 July, 2015 to 30 June, 2020.",
+"ER.MRN.PTMR.ZS","YR2017","Reflects data that was available in the Protected Planet API in August 2018.",
+"ER.LND.PTLD.ZS","YR2017","Reflects data that was available in the Protected Planet API in August 2018.",
+"ER.PTD.TOTL.ZS","YR2017","Reflects data that was available in the Protected Planet API in August 2018.",
+"SP.ADO.TFRT","YR2017","Interpolated using data for 2012 and 2017.",
+"SP.POP.BRTH.MF","YR2017","The data refer to 2015-2020.",
+"DT.DOD.PVLX.CD","YR2017","Present value calculations for these countries are for public and publicly guaranteed debt only.",
 ~~~
 {: .output}
 
@@ -350,102 +350,26 @@ The `-n` option to either of these commands can be used to print the
 first or last `n` lines of a file. 
 
 ~~~
-$ head -n 1 SRR098026.fastq
+$ head -n 1 WDISeries-Time.csv 
 ~~~
 {: .bash}
 
 ~~~
-@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+"SeriesCode","Year","DESCRIPTION",
 ~~~
 {: .output}
 
+This is particularly useful for CSV files, as they often have a column header in their first row.
+
 ~~~
-$ tail -n 1 SRR098026.fastq
+$ tail -n 1 WDISeries-Time.csv 
 ~~~
 {: .bash}
 
 ~~~
-A!@B!BBB@ABAB#########!!!!!!!######
+"DT.DOD.PVLX.CD","YR2017","Present value calculations for these countries are for public and publicly guaranteed debt only.",
 ~~~
 {: .output}
-
-
-## Details on the FASTQ format
-
-Although it looks complicated (and it is), it's easy to understand the
-[fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
-include...
-
-|Line|Description|
-|----|-----------|
-|1|Always begins with '@' and then information about the read|
-|2|The actual DNA sequence|
-|3|Always begins with a '+' and sometimes the same info in line 1|
-|4|Has a string of characters which represent the quality scores; must have same number of characters as line 2|
-
-We can view the first complete read in one of the files in our dataset by using `head` to look at
-the first four lines.
-
-~~~
-$ head -n 4 SRR098026.fastq
-~~~
-{: .bash}
-
-~~~
-@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
-+SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-~~~
-{: .output}
-
-All but one of the nucleotides in this read are unknown (`N`). This is a pretty bad read!
-
-Line 4 shows the quality for each nucleotide in the read. Quality is interpreted as the 
-probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call 
-accuracy (e.g. 90%). To make it possible to line up each individual nucleotide with its quality
-score, the numerical score is converted into a code where each individual character 
-represents the numerical quality score for an individual nucleotide. For example, in the line
-above, the quality score line is: 
-
-~~~
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-~~~
-{: .output}
-
-The `#` character and each of the `!` characters represent the encoded quality for an 
-individual nucleotide. The numerical value assigned to each of these characters depends on the 
-sequencing platform that generated the reads. The sequencing machine used to generate our data 
-uses the standard Sanger quality PHRED score encoding, Illumina version 1.8 onwards.
-Each character is assigned a quality score between 0 and 42 as shown in the chart below.
-
-~~~
-Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJK
-                  |         |         |         |         |
-Quality score:    0........10........20........30........40..                          
-~~~
-{: .output}
-
-Each quality score represents the probability that the corresponding nucleotide call is
-incorrect. This quality score is logarithmically based, so a quality score of 10 reflects a
-base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%. 
-These probability values are the results from the base calling algorithm and dependent on how 
-much signal was captured for the base incorporation. 
-
-Looking back at our read: 
-
-~~~
-@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
-+SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-~~~
-{: .output}
-
-we can now see that the quality of each of the `N`s is 0 and the quality of the only
-nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very
-bad read. 
-
 
 ## Creating, moving, copying, and removing
 
@@ -458,25 +382,26 @@ of those files. In cases like this, it's much faster to do these operations at t
 ### Copying Files
 
 When working with computational data, it's important to keep a safe copy of that data that can't be accidentally overwritten or deleted. 
-For this lesson, our raw data is our FASTQ files.  We don't want to accidentally change the original files, so we'll make a copy of them
+For this lesson, our raw data is our CSV files.  We don't want to accidentally change the original files, so we'll make a copy of them
 and change the file permissions so that we can read from, but not write to, the files.
 
 First, let's make a copy of one of our FASTQ files using the `cp` command. 
 
-Navigate to the `shell_data/untrimmed_fastq` directory and enter:
+Navigate to the `data/raw/worldbank` directory and enter:
 
 ~~~
-$ cp SRR098026.fastq SRR098026-copy.fastq
+$ cp WDIData.csv WDIData-copy.csv 
 $ ls -F
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq  SRR098026-copy.fastq  SRR098026.fastq
+WDICountry-Series.csv*	WDIData-copy.csv*	WDIFootNote.csv*	WDISeries.csv*
+WDICountry.csv*		WDIData.csv*		WDISeries-Time.csv*
 ~~~
 {: .output}
 
-We now have two copies of the `SRR098026.fastq` file, one of them named `SRR098026-copy.fastq`. We'll move this file to a new directory
+We now have two copies of the `WDIData.csv` file, one of them named `WDIData-copy.csv`. We'll move this file to a new directory
 called `backup` where we'll store our backup data files.
 
 ### Creating Directories
@@ -495,13 +420,13 @@ We can now move our backup file to this directory. We can
 move files around using the command `mv`: 
 
 ~~~
-$ mv SRR098026-copy.fastq backup
+$ mv WDIData-copy.csv backup
 $ ls backup
 ~~~
 {: .bash}
  
 ~~~
-SRR098026-copy.fastq
+WDIData-copy.csv
 ~~~
 {: .output}
 
@@ -509,13 +434,13 @@ The `mv` command is also how you rename files. Let's rename this file to make it
 
 ~~~
 $ cd backup
-$ mv SRR098026-copy.fastq SRR098026-backup.fastq
+$ mv WDIData-copy.csv WDIData-backup.csv
 $ ls
 ~~~
 {: .bash}
 
 ~~~
-SRR098026-backup.fastq
+WDIData-backup.csv
 ~~~
 {: .output}
 
@@ -533,7 +458,7 @@ $ ls -l
 {: .bash}
 
 ~~~
--rw-r--r-- 1 dcuser dcuser 43332 Nov 15 23:02 SRR098026-backup.fastq
+-rwxr-xr-x@ 1 koren  staff  213164145 Oct 10 17:25 WDIData-backup.csv
 ~~~
 {: .output}
 
@@ -545,21 +470,20 @@ that deal with your permissions (as the file owner).
 
 ![Permissions breakdown](../fig/rwx_figure.svg)
 
-Here the three positions that relate to the file owner are `rw-`. The `r` means that you have permission to read the file, the `w` 
-indicates that you have permission to write to (i.e. make changes to) the file, and the third position is a `-`, indicating that you 
-don't have permission to carry out the ability encoded by that space (this is the space where `x` or executable ability is stored, we'll 
-talk more about this in [a later lesson](http://www.datacarpentry.org/shell-genomics/05-writing-scripts/)).
+Here the three positions that relate to the file owner are `rwx`. The `r` means that you have permission to read the file, the `w` 
+indicates that you have permission to write to (i.e. make changes to) the file, and the third position is a `x`. We'll 
+talk more about this in [a later lesson](http://www.datacarpentry.org/shell-economics/05-writing-scripts/)).
 
 Our goal for now is to change permissions on this file so that you no longer have `w` or write permissions. We can do this using the `chmod` (change mode) command and subtracting (`-`) the write permission `-w`. 
 
 ~~~
-$ chmod -w SRR098026-backup.fastq
+$ chmod -w WDIData-backup.csv 
 $ ls -l 
 ~~~
 {: .bash}
 
 ~~~
--r--r--r-- 1 dcuser dcuser 43332 Nov 15 23:02 SRR098026-backup.fastq
+-r-xr-xr-x@ 1 koren  staff  213164145 Oct 10 17:25 WDIData-backup.csv
 ~~~
 {: .output}
 
@@ -568,14 +492,14 @@ $ ls -l
 To prove to ourselves that you no longer have the ability to modify this file, try deleting it with the `rm` command:
 
 ~~~
-$ rm SRR098026-backup.fastq
+$ rm WDIData-backup.csv
 ~~~
 {: .bash}
 
 You'll be asked if you want to override your file permissions:
 
 ~~~
-rm: remove write-protected regular file ‘SRR098026-backup.fastq’? 
+override r-xr-xr-x  koren/staff for WDIData-backup.csv? 
 ~~~
 {: .output}
 
@@ -602,9 +526,9 @@ you will be asked whether you want to override your permission settings.
 
 > ## Exercise
 >
-> Starting in the `shell_data/untrimmed_fastq/` directory, do the following:
+> Starting in the `data/raw/worldbank/` directory, do the following:
 > 1. Make sure that you have deleted your backup directory and all files it contains.  
-> 2. Create a backup of each of your FASTQ files using `cp`. (Note: You'll need to do this individually for each of the two FASTQ files. We haven't 
+> 2. Create a backup of each of your CSV files using `cp`. (Note: You'll need to do this individually for each of the six CSV files. We haven't 
 > learned yet how to do this
 > with a wildcard.)  
 > 3. Use a wildcard to move all of your backup files to a new backup directory.   
@@ -613,14 +537,28 @@ you will be asked whether you want to override your permission settings.
 > > ## Solution
 > >
 > > 1. `rm -r backup`  
-> > 2. `cp SRR098026.fastq SRR098026-backup.fastq` and `cp SRR097977.fastq SRR097977-backup.fastq`  
-> > 3. `mkdir backup` and `mv *-backup.fastq backup`
-> > 4. `chmod -w backup/*-backup.fastq`   
+> > 2. 
+> > ```
+> > cp WDICountry-Series.csv WDICountry-Series-backup.csv
+> > cp WDICountry.csv WDICountry-backup.csv 
+> > cp WDIData.csv WDIData-backup.csv 
+> > cp WDIFootNote.csv WDIFootNote-backup.csv 
+> > cp WDISeries-Time.csv WDISeries-Time-backup.csv 
+> > cp WDISeries.csv WDISeries-backup.csv
+> > ```
+> > {: .bash}
+> > 3. `mkdir backup` and `mv *-backup.csv backup`
+> > 4. `chmod -w backup/*-backup.csv`   
 > > It's always a good idea to check your work with `ls -l backup`. You should see something like: 
 > > 
 > > ~~~
-> > -r--r--r-- 1 dcuser dcuser 47552 Nov 15 23:06 SRR097977-backup.fastq
-> > -r--r--r-- 1 dcuser dcuser 43332 Nov 15 23:06 SRR098026-backup.fastq
+> > total 522592
+> > -r-xr-xr-x@ 1 koren  staff     785984 Oct 10 17:35 WDICountry-Series-backup.csv
+> > -r-xr-xr-x@ 1 koren  staff     169534 Oct 10 17:35 WDICountry-backup.csv
+> > -r-xr-xr-x@ 1 koren  staff  213164145 Oct 10 17:35 WDIData-backup.csv
+> > -r-xr-xr-x@ 1 koren  staff   49492815 Oct 10 17:35 WDIFootNote-backup.csv
+> > -r-xr-xr-x@ 1 koren  staff      43570 Oct 10 17:35 WDISeries-Time-backup.csv
+> > -r-xr-xr-x@ 1 koren  staff    3898578 Oct 10 17:35 WDISeries-backup.csv
 > > ~~~
 > > {: .output}
 > {: .solution}

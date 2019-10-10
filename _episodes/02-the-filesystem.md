@@ -24,30 +24,33 @@ We've also learned how to use `cd` to change locations and `ls` to list the cont
 of a directory. Now we're going to learn some additional commands for moving around 
 within our file system.
 
-Use the commands we've learned so far to navigate to the `shell_data/untrimmed_fastq` directory, if
+Use the commands we've learned so far to navigate to the `data/raw/worldbnk` directory, if
 you're not already there. 
 
 ~~~
 $ cd
-$ cd shell_data
-$ cd untrimmed_fastq
+$ cd Downloads
+$ cd shell-economics
+$ cd data
+$ cd raw
+$ cd worldbank
 ~~~
 {: .bash}
 
 What if we want to move back up and out of this directory and to our top level 
-directory? Can we type `cd shell_data`? Try it and see what happens.
+directory? Can we type `cd data`? Try it and see what happens.
 
 ~~~
-$ cd shell_data
+$ cd data
 ~~~
 {: .bash}
 
 ~~~
--bash: cd: shell_data: No such file or directory
+-bash: cd: data: No such file or directory
 ~~~
 {: .output}
 
-Your computer looked for a directory or file called `shell_data` within the 
+Your computer looked for a directory or file called `data` within the 
 directory you were already in. It didn't know you wanted to look at a directory level
 above the one you were located in. 
 
@@ -68,7 +71,7 @@ $ pwd
 {: .bash}
 
 ~~~
-/home/dcuser/shell_data
+/Users/koren/Downloads/shell-economics/data/raw
 ~~~
 {: .output}
 
@@ -78,7 +81,7 @@ $ ls
 {: .bash}
 
 ~~~
-sra_metadata  untrimmed_fastq
+cepii		worldbank
 ~~~
 {: .output}
 
@@ -91,7 +94,9 @@ $ ls ../../
 ~~~
 {: .bash}
 
-prints the contents of `/home`, which is one level up from your root directory. 
+prints the contents of `/Users/koren/Downloads/shell-economics`. 
+
+FIXME: add hidden directory
 
 > ## Finding hidden directories
 >
@@ -162,16 +167,16 @@ $ cd
 Then enter the command:
 
 ~~~
-$ ls shell_data
+$ ls Downloads/shell-economics
 ~~~
 {: .bash}
 
 ~~~
-sra_metadata  untrimmed_fastq
+LICENSE.md		README.md		code			data			dc-economics.zip	doc
 ~~~
 {: .output}
 
-This will list the contents of the `shell_data` directory without
+This will list the contents of the `shell-economics` directory without
 you needing to navigate there.
 
 The `cd` command works in a similar way.
@@ -180,35 +185,35 @@ Try entering:
 
 ~~~
 $ cd
-$ cd shell_data/untrimmed_fastq
+$ cd Downloads/shell-economics/data/raw/
 ~~~
 {: .bash}
 
-This will take you to the `untrimmed_fastq` directory without having to go through
+This will take you to the `raw` directory without having to go through
 the intermediate directory.
 
 > ## Navigating practice
 > 
-> Navigate to your home directory. From there, list the contents of the `untrimmed_fastq` 
+> Navigate to your home directory. From there, list the contents of the `raw` 
 > directory. 
 > 
 > > ## Solution
 > >
 > > ~~~
 > > $ cd
-> > $ ls shell_data/untrimmed_fastq/
+> > $ ls Downloads/shell-economics/data/raw/
 > > ~~~
 > > {: .bash}
 > > 
 > > ~~~
-> > SRR097977.fastq  SRR098026.fastq 
+> > cepii		worldbank 
 > > ~~~
 > > {: .output}
 > > 
 > {: .solution}
 {: .challenge}
 
-## Full vs. Relative Paths
+## Absolute vs. Relative Paths
 
 The `cd` command takes an argument which is a directory
 name. Directories can be specified using either a *relative* path or a
@@ -223,24 +228,24 @@ $ pwd
 ~~~
 {: .bash}
 
-You will see: 
+You will see something like: 
 
 ~~~
-/home/dcuser
+/Users/koren
 ~~~
 {: .output}
 
 This is the full name of your home directory. This tells you that you
-are in a directory called `dcuser`, which sits inside a directory called
-`home` which sits inside the very top directory in the hierarchy. The
+are in a directory called `koren`, which sits inside a directory called
+`Users` which sits inside the very top directory in the hierarchy. The
 very top of the hierarchy is a directory called `/` which is usually
-referred to as the *root directory*. So, to summarize: `dcuser` is a
-directory in `home` which is a directory in `/`.
+referred to as the *root directory*. So, to summarize: `koren` is a
+directory in `Users` which is a directory in `/`.
 
 Now enter the following command:
 
 ~~~
-$ cd /home/dcuser/shell_data/.hidden
+$ cd cd /Users/koren/Downloads/shell-economics/.hidden
 ~~~
 {: .bash}
 
@@ -255,7 +260,7 @@ $ cd
 You can also navigate to the `.hidden` directory using:
 
 ~~~
-$ cd shell_data/.hidden
+$ cd Downloads/shell-economics/.hidden
 ~~~
 {: .bash}
 
@@ -306,12 +311,12 @@ navigate amongst them.
 
 There are some shortcuts which you should know about. Dealing with the
 home directory is very common. The tilde character,
-`~`, is a shortcut for your home directory. Navigate to the `shell_data`
+`~`, is a shortcut for your home directory. Navigate to the `shell-economics/data`
 directory:
 
 ~~~
 $ cd
-$ cd shell_data
+$ cd Downloads/shell-economics/data
 ~~~
 {: .bash}
 
@@ -322,8 +327,10 @@ $ ls ~
 ~~~
 {: .bash}
 
+Your output will be similar to
 ~~~
-R  r_data  shell_data
+Applications	Documents	Dropbox		Google Drive	Movies		Pictures	Tresors		bin		texput.log
+Desktop		Downloads	GD		Library		Music		Public
 ~~~
 {: .output}
 
