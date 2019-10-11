@@ -123,7 +123,8 @@ FIXME: add hidden directory
 > > {: .bash}
 > > 
 > > ~~~
-> > .  ..  .hidden	sra_metadata  untrimmed_fastq
+> > .			.hidden			README.md		data			doc
+> > ..			LICENSE.md		code			dc-economics.zip
 > > ~~~
 > > {: .output}
 > > 

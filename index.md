@@ -16,7 +16,7 @@ There are quite a few reasons to start learning about the shell:
 >
 > This lesson assumes no prior experience with the tools covered in the workshop. Participants should bring their laptops and plan to participate actively. 
 >
-> This lesson is part of a workshop that uses data hosted on [Zenodo](https://zenodo.org/record/3477935#.XZ9B_uczYWo). Please see the [Workshop setup page](https://korenmiklos.github.io/2019-10-15-CEU/#setup).
+> This lesson is part of a workshop that uses data hosted on [Zenodo](https://zenodo.org/record/3480181). Please see the [Workshop setup page](https://korenmiklos.github.io/2019-10-15-CEU/#setup).
 {: .prereq}
 
 > ## For Instructors
