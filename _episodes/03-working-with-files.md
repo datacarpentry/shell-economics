@@ -385,7 +385,7 @@ When working with computational data, it's important to keep a safe copy of that
 For this lesson, our raw data is our CSV files.  We don't want to accidentally change the original files, so we'll make a copy of them
 and change the file permissions so that we can read from, but not write to, the files.
 
-First, let's make a copy of one of our FASTQ files using the `cp` command. 
+First, let's make a copy of one of our CSV files using the `cp` command. 
 
 Navigate to the `data/raw/worldbank` directory and enter:
 

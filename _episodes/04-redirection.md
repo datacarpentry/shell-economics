@@ -36,7 +36,7 @@ Let's give it a try!
 > 
 {: .callout}
 
-We'll search for indicators inside of our fastq files. Let's first make sure we are in the correct 
+We'll search for indicators inside of our CSV files. Let's first make sure we are in the correct 
 directory:
 
 ~~~
