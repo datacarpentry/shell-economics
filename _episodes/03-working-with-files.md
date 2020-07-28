@@ -472,7 +472,7 @@ that deal with your permissions (as the file owner).
 
 Here the three positions that relate to the file owner are `rwx`. The `r` means that you have permission to read the file, the `w` 
 indicates that you have permission to write to (i.e. make changes to) the file, and the third position is a `x`. We'll 
-talk more about this in [a later lesson](http://www.datacarpentry.org/shell-economics/05-writing-scripts/)).
+talk more about this in [a later lesson](http://www.datacarpentry.org/shell-economics/05-writing-scripts/).
 
 Our goal for now is to change permissions on this file so that you no longer have `w` or write permissions. We can do this using the `chmod` (change mode) command and subtracting (`-`) the write permission `-w`. 
 
