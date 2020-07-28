@@ -23,7 +23,7 @@ keypoints:
 
 We discussed in a previous episode how to search within a file using `less`. We can also
 search within files without even opening them, using `grep`. `grep` is a command-line
-utility for searching plain-text files for lines matching a specific set of 
+utility for searching plain-text files for lines matching a specific sequence of 
 characters (sometimes called a string) or a particular pattern 
 (which can be specified using something called regular expressions). We're not going to work with 
 regular expressions in this lesson, and are instead going to specify the strings 
@@ -219,9 +219,9 @@ doesn't require us to create these intermediate files - the pipe command (`|`).
 This is probably not a key on
 your keyboard you use very much, so let's all take a minute to find that key. 
 What `|` does is take the output that is
-scrolling by on the terminal and uses that output as input to another command. 
+scrolling by on the terminal and use that output as input to another command. 
 When our output was scrolling by, we might have wished we could slow it down and
-look at it, like we can with `less`. Well it turns out that we can! We can redirect our output
+look at it, like we can with `less`. Well, it turns out that we can! We can redirect our output
 from our `grep` call through the `less` command.
 
 ~~~
@@ -384,7 +384,7 @@ $ for filename in *.csv
 > {: .solution}
 {: .challenge}
 
-One way this is really useful is to move files. Let's rename all of our .md files using `mv` so that they have the years on them, which will document when we created them. 
+One way this is really useful is to move files. Let's rename all of our `.md` files using `mv` so that they have the years on them, which will document when we created them. 
 
 ~~~
 $ for filename in *.md
