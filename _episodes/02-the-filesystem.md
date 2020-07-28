@@ -246,7 +246,7 @@ directory in `Users` which is a directory in `/`.
 Now enter the following command:
 
 ~~~
-$ cd cd /Users/koren/Downloads/shell-economics/.hidden
+$ cd /Users/koren/Downloads/shell-economics/.hidden
 ~~~
 {: .bash}
 
