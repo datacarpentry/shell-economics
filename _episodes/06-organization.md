@@ -3,10 +3,10 @@ title: "Project Organization"
 teaching: 15
 exercises: 15
 questions:
-- "How can I organize my file system for a new bioinformatics project?"
+- "How can I organize my file system for a new empirical project?"
 - "How can I document my work?"
 objectives:
-- "Create a file system for a bioinformatics project."
+- "Create a file system for an empirical project."
 - "Explain what types of files should go in your `docs`, `data`, and `results` directories."
 - "Use the `history` command and a text editor like `nano` to document your work on your project."
 keypoints:
@@ -16,39 +16,28 @@ keypoints:
 
 # Getting your project started
 
-Project organization is one of the most important parts of a sequencing project, and yet is often overlooked amidst the
+Project organization is one of the most important parts of an empirical project, and yet is often overlooked amidst the
 excitement of getting a first look at new data. Of course, while it's best to get yourself organized before you even begin your analyses,
 it's never too late to start, either.  
 
-You should approach your sequencing project similarly to how you do a biological experiment and this ideally begins with experimental design. We're going to assume that you've already designed a beautiful 
-sequencing experiment to address your biological question, collected appropriate samples, and that you have 
+You should approach your project similarly to how you do the analysis iteself and this ideally begins with the research design. We're going to assume that you've already have the research to address your economics question, collected the appropriate data, and that you have 
 enough statistical power to answer the questions you're interested in asking. These 
 steps are all incredibly important, but beyond the scope of our course. 
-For all of those steps (collecting specimens, extracting DNA, prepping your samples)
-you've likely kept a lab notebook that details how and why you did each step. However, the process of documentation doesn't stop at 
-the sequencer!  
 
-Genomics projects can quickly accumulate hundreds of files across 
-tens of folders. Every computational analysis you perform over the course of your project is going to create
-many files, which can especially become a problem when you'll inevitably want to run some of those
-analyses again. For instance, you might have made significant headway into your project, but then have to remember the PCR conditions
-you used to create your sequencing library months prior. 
+Economics projects can quickly accumulate dozens of files across 
+many folders. Every regression you perform over the course of your project is going to create
+a separate table, which can especially become a problem when you'll inevitably want to run some of those
+analyses again. For instance, you might have made significant headway into your project, but then have to remember the variable transformations
+you used in the regression months prior. 
 
 Other questions might arise along the way: 
-- What were your best alignment results?
+- What were your best regression results?
 - Which folder were they in: Analysis1, AnalysisRedone, or AnalysisRedone2?
-- Which quality cutoff did you use?
+- What sample definition did you use?
 - What version of a given program did you implement your analysis in?
 
-Good documentation is key to avoiding this issue, and luckily enough,
-recording your computational experiments is even easier than recording lab data. Copy/Paste will become
-your best friend, sensible file names will make your analysis understandable by you and your collaborators, and 
-writing the methods section for your next paper will be easy! Remember that in any given project of yours, it's worthwhile to consider
-a future version of yourself as an entirely separate collaborator. The better your documenation is, the more this 'collaborator' will
-feel indebted to you!
-
 With this in mind, let's have a look at the best practices for 
-documenting your genomics project. Your future self will thank you.  
+documenting your empirical project. Your future self will thank you.  
 
 In this exercise we will setup a file system for the project we will be working on during this workshop.  
 
@@ -126,7 +115,7 @@ your data that you never modify guarantees that you will always be
 able to start over if something goes wrong with your analysis. When
 starting any analysis, you can make a copy of your raw data file and
 do your manipulations on that file, rather than the raw version. We
-learned in [a previous episode](http://www.datacarpentry.org/shell-genomics/03-working-with-files/#file-permissions) how to prevent overwriting our raw data
+learned in [a previous episode](http://www.datacarpentry.org/shell-economics/03-working-with-files/#file-permissions) how to prevent overwriting our raw data
 files by setting restrictive file permissions. 
 
 You can store any results that are generated from your analysis in
@@ -140,15 +129,9 @@ documents related to your eventual publication.
 
 # Documenting your activity on the project
 
-When carrying out wet-lab analyses, most scientists work from a 
-written protocol and keep a hard copy of written notes in their lab
-notebook, including any things they did differently from the 
-written protocol. This detailed
-record-keeping process is just as important when doing computational
-analyses. Luckily, it's even easier to record the steps you've 
-carried out computational than it is when working at the bench.
-
-The `history` command is a convenient way to document all the
+Detailed
+record-keeping process is important when doing computational
+analyses. The `history` command is a convenient way to document all the
 commands you have used while analyzing and manipulating your project
 files. Let's document the work we have done on our project so far. 
 
@@ -271,14 +254,10 @@ It's important that we keep our workshop log file outside of our `dc_workshop` d
 if we want to use it to recreate our work. It's also important for us to keep it up to
 date by regularly updating with the commands that we used to generate our results files.
 
-Congratulations! You've finished your introduction to using the shell for genomics
+Congratulations! You've finished your introduction to using the shell for economics
 projects. You now know how to navigate your file system, create, copy, move,
 and remove files and directories, and automate repetitive tasks using scripts and 
 wildcards. With this solid foundation, you're ready to move on to apply all of these new
-skills to carrying out more sophisticated bioinformatics
-analysis work. Don't worry if everything doesn't feel perfectly comfortable yet. We're
-going to have many more opportunities for practice as we move forward on our 
-bioinformatics journey!
+skills to carrying out more sophisticated empirical work. Don't worry if everything doesn't feel perfectly comfortable yet. We're
+going to have many more opportunities for practice as we move forward on our  journey!
 
-## References
-[A Quick Guide to Organizing Computational Biology Projects](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)

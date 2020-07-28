@@ -11,7 +11,7 @@ either because there is no good alternative for the type of anaysis they want to
 things manually on individual files is unfeasible. 
 
 This lesson will introduce learners to fundamental skills needed for working with their computers through a command-line interface (using
-the bash shell). They will learn how to navigate their file system, computationally manipulate their files (e.g. copying, moving, renaming), search files, redirect output and write shell scripts. By the end of the lesson, learners will be prepared to move on to using more advanced bioinformatic command line tools (see the lesson on [Data Wrangling and Processing](http://www.datacarpentry.org/wrangling-genomics/)).
+the bash shell). They will learn how to navigate their file system, computationally manipulate their files (e.g. copying, moving, renaming), search files, redirect output and write shell scripts. By the end of the lesson, learners will be prepared to move on to using more advanced command line tools.
 
 ## Lesson design
 
