@@ -96,7 +96,7 @@ Lists every file in `/usr/bin` that ends in the characters `.sh`.
 > special permissions which are not discussed here, so it's best to avoid it and work within your home directory.
 {: .callout}
 
-> ## Exercise
+> ## Exercise (Linux and Mac)
 > Do each of the following tasks from your current directory using a single
 > `ls` command for each:
 > 
@@ -116,6 +116,30 @@ Lists every file in `/usr/bin` that ends in the characters `.sh`.
 > > 2. `ls /usr/bin/*a*`
 > > 3. `ls /usr/bin/*o`  
 > > Bonus: `ls /usr/bin/*[ac]*`
+> > 
+> {: .solution}
+{: .challenge}
+
+> ## Exercise (Windows)
+> Do each of the following tasks from your current directory using a single
+> `ls` command for each:
+> 
+> 1.  List all of the files in `/usr/bin` that start with the letter 'c' and end with '.exe'.
+> 2.  List all of the files in `/usr/bin` that contain the letter 'a' and end with '.exe'. 
+> 3.  List all of the files in `/usr/bin` that end with the letters 'o.exe'.
+>
+> Bonus: List all of the files in `/usr/bin` that contain the letter 'a' or the
+> letter 'c' and end with '.exe'.
+> 
+> Hint: The bonus question requires a Unix wildcard that we haven't talked about
+> yet. Try searching the internet for information about Unix wildcards to find
+> what you need to solve the bonus problem.
+> 
+> > ## Solution
+> > 1. `ls /usr/bin/c*.exe`
+> > 2. `ls /usr/bin/*a*.exe`
+> > 3. `ls /usr/bin/*o.exe`  
+> > Bonus: `ls /usr/bin/*[ac]*.exe`
 > > 
 > {: .solution}
 {: .challenge}
