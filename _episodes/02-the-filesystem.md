@@ -24,7 +24,7 @@ We've also learned how to use `cd` to change locations and `ls` to list the cont
 of a directory. Now we're going to learn some additional commands for moving around 
 within our file system.
 
-Use the commands we've learned so far to navigate to the `data/raw/worldbnk` directory, if
+Use the commands we've learned so far to navigate to the `data/raw/worldbank` directory, if
 you're not already there. 
 
 ~~~
@@ -95,8 +95,6 @@ $ ls ../../
 {: .bash}
 
 prints the contents of `/Users/koren/Downloads/shell-economics`. 
-
-FIXME: add hidden directory
 
 > ## Finding hidden directories
 >
