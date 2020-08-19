@@ -314,7 +314,7 @@ return, you will search backwards and move up the file to previous examples of t
 
 > ## Exercise
 >
-> What is the three-letter word after the first occurence of the word "Tanzania"?
+> What is the three-letter word after the first occurrence of the word "Tanzania"?
 > 
 > > ## Solution
 > > `TZA`
