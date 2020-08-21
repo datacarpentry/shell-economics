@@ -44,8 +44,6 @@ $ cd ~/Downloads/shell-economics/data/raw/worldbank/
 ~~~
 {: .bash}
 
-Suppose we want to see how many reads in our file have really bad segments containing 10 consecutive unknown nucleotides (Ns).
-
 Let's search for the string `NY.GDP.PCAP.PP.KD` in `WDIData.csv`:
 ~~~
 $ grep NY.GDP.PCAP.PP.KD WDIData.csv
