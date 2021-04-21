@@ -7,8 +7,9 @@ title: Setup
 ## Download files
 You need to download some files to follow this lesson.
 
-1. Download [data-shell.zip][zip-file] and move the file to your Desktop.
-2. Unzip/extract the file.
+1. Download the [data](https://zenodo.org/record/3994932/files/dc-economics-v2.1.zip?download=1) 
+and move the file to your Desktop.
+3. Unzip/extract the file.
    **Let your instructor know if you need help with this step**.
    You should end up with a new folder called **`data-shell`** on your Desktop.
 
