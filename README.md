@@ -23,6 +23,7 @@ Orignal Port from [Genomics Lesson](https://datacarpentry.org/shell-genomics/)
 
 * [Miklós Koren](https://github.com/korenmiklos)
 * [Arieda Muço](https://github.com/ariedamuco) 
+* [András Vereckei](https://github.com/andrasvereckei)
 
 [Shell economics additional authors and maintainers](https://github.com/datacarpentry/shell-economics/network/members). 
 
